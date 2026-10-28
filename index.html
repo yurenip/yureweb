@@ -10,23 +10,68 @@
 
 <body>
     <main>
-        <div style="display: flex; gap: 1rem; padding-bottom: 1rem; align-items: center; justify-content:space-evenly;">
-            <img src="./pfp.png" style="width: 100%; height: 8rem; object-fit: fill;">
+        <div class="divide">
+            <img src="./assets/images/pfp.png" style="width: 100%; height: 8rem; object-fit: fill;">
             <p style="font-size: 200%; text-wrap-mode: nowrap;"><--- stupid</p>
         </div>
         <h1>yurenip</h1>
-        <small style="color: #f5eedc63;">formerly known as pea, peasoup, veggiepeasoup and whatnot</small>
+        <small>also known as pea, peasoup, veggiepeasoup and whatnot</small>
         <p>i like coding and games!!!</p>
         <p>i also love music mmhm yeah i can't live a day without it</p>
         <ul>
             <li><a href="https://pixl.hackclub.com" target="_blank">pixl</a></li>
             <li><a href="https://github.com/yurenip" target="_blank">github</a></li>
+            <li><a href="https://twitter.com/yureniip" target="_blank">twitter</a></li>
         </ul>
 
         <p style="padding-top: 0.5rem;">here have a listen to this thing because a lot will come soon after</p>
         <iframe id="sc" width="100%" height="300" scrolling="yes" frameborder="no" allow="autoplay; encrypted-media"
             src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/soundcloud%253Aplaylists%253A1829453106&color=%23ff5500&auto_play=false&hide_related=false&show_comments=false&show_user=true&show_reposts=false&show_teaser=true&visual=false"></iframe>
+
+        <div class="sec">
+            <div class="divide">
+                <div>
+                    <h2 style="margin-bottom: 0.5rem;">the catball project</h2>
+                    <small>the thing that started it all</small>
+                </div>
+                <img src="./assets/images/catball/catball.png" width="25%">
+            </div>
+
+            <p>going from a simple hangout game to a <span class="wavytext">tiny inside joke,</span> the catball project
+                is what got me into coding and programming. also it's dead i stopped working on it altogether</p>
+
+            <div class="divide">
+                <img src="./assets/images/catball/become catball.png" width="25%">
+                <img src="./assets/images/catball/raise catball.png" width="25%">
+                <img src="./assets/images/catball/catball trophy.png" width="40%">
+            </div>
+
+            <p>~ live laugh love catball <3</p>
+        </div>
     </main>
+
+    <script>
+        const elements = document.querySelectorAll(".wavytext");
+        for (let i = 0; i < elements.length; i++) {
+            const element = elements[i];
+            const text = element.textContent;
+
+            element.textContent = "";
+
+            for (const symbol of text) {
+                const span = document.createElement("span");
+                span.className = "wavysymbol";
+                span.textContent = symbol === " " ? "\u00A0" : symbol;
+                element.appendChild(span);
+            }
+
+            let delay = 0;
+            for (const span of element.querySelectorAll(".wavysymbol")) {
+                span.style.animationDelay = `-${delay}s`;
+                delay += 0.1;
+            }
+        }
+    </script>
 </body>
 
 </html>
