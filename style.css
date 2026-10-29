@@ -86,3 +86,20 @@ p {
     from { transform: translateY(10%); }
     to { transform: translateY(-10%); }
 }
+
+.lightbox {
+    background-color: #141312;
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    bottom:0;
+    display:none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.lightbox img {
+    height: 50%;
+}

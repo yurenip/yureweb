@@ -9,9 +9,14 @@
 </head>
 
 <body>
+    <div class="lightbox">
+        <img src="" alt="">
+        <p></p>
+    </div>
+
     <main>
         <div class="divide">
-            <img src="./assets/images/pfp.png" style="width: 100%; height: 8rem; object-fit: fill;">
+            <img class="vimg" src="./assets/images/pfp.png" alt="me" style="width: 100%; height: 8rem;">
             <p style="font-size: 200%; text-wrap-mode: nowrap;"><--- stupid</p>
         </div>
         <h1>yurenip</h1>
@@ -22,9 +27,13 @@
             <li><a href="https://pixl.hackclub.com" target="_blank">pixl</a></li>
             <li><a href="https://github.com/yurenip" target="_blank">github</a></li>
             <li><a href="https://twitter.com/yureniip" target="_blank">twitter</a></li>
+            <li><a href="https://soundcloud.com/yurenip" target="_blank">soundcloud</a></li>
+            <li><a href="https://www.roblox.com/users/827000553/profile" target="_blank">roblox</a></li>
+            <li><a href="#" onclick="navigator.clipboard.writeText('yurenip'); this.textContent = 'copied!'; setTimeout(() => {this.textContent = 'discord'},1000);">discord</a></li>
+
         </ul>
 
-        <p style="padding-top: 0.5rem;">here have a listen to this thing because a lot will come soon after</p>
+        <p style="padding-top: 0.5rem;">here's this because more projects will pop out and whatnot so you have more thingies to listen to</p>
         <iframe id="sc" width="100%" height="300" scrolling="yes" frameborder="no" allow="autoplay; encrypted-media"
             src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/soundcloud%253Aplaylists%253A1829453106&color=%23ff5500&auto_play=false&hide_related=false&show_comments=false&show_user=true&show_reposts=false&show_teaser=true&visual=false"></iframe>
 
@@ -34,26 +43,28 @@
                     <h2 style="margin-bottom: 0.5rem;">the catball project</h2>
                     <small>the thing that started it all</small>
                 </div>
-                <img src="./assets/images/catball/catball.png" width="25%">
+                <img class="vimg" src="./assets/images/catball/catball.png" alt="thing i drew in 3 minutes" width="25%">
             </div>
 
             <p>going from a simple hangout game to a <span class="wavytext">tiny inside joke,</span> the catball project
                 is what got me into coding and programming. also it's dead i stopped working on it altogether</p>
 
             <div class="divide">
-                <img src="./assets/images/catball/become catball.png" width="25%">
-                <img src="./assets/images/catball/raise catball.png" width="25%">
-                <img src="./assets/images/catball/catball trophy.png" width="40%">
+                <img class="vimg" src="./assets/images/catball/become catball.png" width="25%"
+                    alt="the catball itself meowing in japanese">
+                <img class="vimg" src="./assets/images/catball/raise catball.png" width="25%"
+                    alt='icon for "raise a catball"'>
+                <img class="vimg" src="./assets/images/catball/catball trophy.png" width="40%"
+                    alt="render of the catball trophy for the catball awards that ended up not happening">
             </div>
 
-            <p>~ live laugh love catball <3</p>
+            <p>
+                ~ live laugh love catball <3 </p>
         </div>
     </main>
 
     <script>
-        const elements = document.querySelectorAll(".wavytext");
-        for (let i = 0; i < elements.length; i++) {
-            const element = elements[i];
+        document.querySelectorAll(".wavytext").forEach((element) => {
             const text = element.textContent;
 
             element.textContent = "";
@@ -70,7 +81,69 @@
                 span.style.animationDelay = `-${delay}s`;
                 delay += 0.1;
             }
-        }
+        });
+
+        const lightbox = document.querySelector(".lightbox");
+        const viewimage = lightbox.querySelector("img");
+        const lightboxtext = lightbox.querySelector("p");
+
+        document.addEventListener("click", async (e) => {
+            clickedimage = e.target.closest(".vimg")
+            if (!clickedimage) return;
+
+            viewimage.src = clickedimage.src;
+
+            if (clickedimage.alt == "") {
+                lightboxtext.style.display = "none"
+            } else {
+                lightboxtext.style.display = ""
+                lightboxtext.textContent = clickedimage.alt;
+            }
+
+            lightbox.style.display = "flex";
+            const animation = lightbox.animate(
+                [
+                    { opacity: 0, background: "#141312" },
+                    { opacity: 1, background: "#141312f0" },
+                ],
+                { duration: 100, fill: "forwards" },
+            );
+        })
+
+        lightbox.addEventListener("click", async (e) => {
+            if (e.target !== lightbox) return;
+            const animation = lightbox.animate(
+                [
+                    { opacity: 1, background: "#141312f0" },
+                    { opacity: 0, background: "#141312" },
+                ],
+                100,
+            );
+            await animation.finished;
+            lightbox.style.display = "none";
+        })
+
+        lightbox.addEventListener("mouseover", (e) => {
+            if (e.target !== lightbox) return;
+            const animation = lightbox.animate(
+                [
+                    { background: "#141312f0" },
+                    { background: "#141312e0" },
+                ],
+                { duration: 100, fill: "forwards" },
+            );
+        })
+
+        lightbox.addEventListener("mouseout", (e) => {
+            if (e.target !== lightbox) return;
+            const animation = lightbox.animate(
+                [
+                    { background: "#141312e0" },
+                    { background: "#141312f0" },
+                ],
+                { duration: 100, fill: "forwards" },
+            );
+        })
     </script>
 </body>
 
