@@ -54,10 +54,12 @@ a:hover {
     gap: 1rem;
     padding-bottom: 1rem;
     align-items: center;
-    justify-content:space-around;
+    justify-content: space-around;
 }
 
-small {color: #f5eedc63;}
+small {
+    color: #f5eedc63;
+}
 
 ul {
     list-style: none;
@@ -67,6 +69,9 @@ ul {
     gap: 1.25rem;
     margin-top: 1.5rem;
     margin-bottom: 0rem;
+
+    flex-wrap: wrap;
+    justify-content: space-evenly;
 }
 
 img {
@@ -77,14 +82,37 @@ p {
     line-height: 1.5rem;
 }
 
+@supports (-webkit-app-region: inherit) {
+    #ageformat .wavysymbol {
+        animation: none !important; /* chromium browsers dont like different transforms with background-clip */
+    }
+}
+
+#ageformat {
+    font-family: 'Roboto Mono';
+    line-height: 1.25em;
+    font-weight: bold;
+    color: transparent;
+    background-clip: text;
+    background-image: linear-gradient(#5BCEFA, #F5A9B8, #FFFFFF, #F5A9B8, #5BCEFA);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    text-wrap: nowrap;
+}
+
 .wavysymbol {
     display: inline-block;
     animation: wave 1s ease-in-out infinite alternate;
 }
 
 @keyframes wave {
-    from { transform: translateY(10%); }
-    to { transform: translateY(-10%); }
+    from {
+        transform: translateY(10%);
+    }
+
+    to {
+        transform: translateY(-10%);
+    }
 }
 
 .vimg:hover {
@@ -97,14 +125,16 @@ p {
     z-index: 1;
     width: 100%;
     height: 100%;
-    bottom:0;
-    display:none;
+    left: 0;
+    bottom: 0;
+    display: none;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
-.lightbox img, .lightbox p {
+.lightbox img,
+.lightbox p {
     max-height: 50%;
     max-width: 75%;
 }
