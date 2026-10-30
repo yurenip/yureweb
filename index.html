@@ -21,6 +21,9 @@
         </div>
         <h1>yurenip</h1>
         <small>also known as pea, peasoup, veggiepeasoup and whatnot</small>
+        <p id="ageformat"
+            style="font-weight: bold; width: fit-content; color: transparent; background: linear-gradient(#5BCEFA, #F5A9B8, #FFFFFF, #F5A9B8, #5BCEFA); background-clip: text;">
+        </p>
         <p>i like coding and games!!!</p>
         <p>i also love music mmhm yeah i can't live a day without it</p>
         <ul>
@@ -29,11 +32,14 @@
             <li><a href="https://twitter.com/yureniip" target="_blank">twitter</a></li>
             <li><a href="https://soundcloud.com/yurenip" target="_blank">soundcloud</a></li>
             <li><a href="https://www.roblox.com/users/827000553/profile" target="_blank">roblox</a></li>
-            <li><a href="#" onclick="navigator.clipboard.writeText('yurenip'); this.textContent = 'copied!'; setTimeout(() => {this.textContent = 'discord'},1000);">discord</a></li>
+            <li><a href="#"
+                    onclick="navigator.clipboard.writeText('yurenip'); this.textContent = 'copied!'; setTimeout(() => {this.textContent = 'discord'},1000);">discord</a>
+            </li>
 
         </ul>
 
-        <p style="padding-top: 0.5rem;">here's this because more projects will pop out and whatnot so you have more thingies to listen to</p>
+        <p style="padding-top: 0.5rem;">here's this because more projects will pop out and whatnot so you have more
+            thingies to listen to</p>
         <iframe id="sc" width="100%" height="300" scrolling="yes" frameborder="no" allow="autoplay; encrypted-media"
             src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/soundcloud%253Aplaylists%253A1829453106&color=%23ff5500&auto_play=false&hide_related=false&show_comments=false&show_user=true&show_reposts=false&show_teaser=true&visual=false"></iframe>
 
@@ -64,23 +70,66 @@
     </main>
 
     <script>
-        document.querySelectorAll(".wavytext").forEach((element) => {
-            const text = element.textContent;
 
-            element.textContent = "";
+        function renderWavy(element, text) {
+            if (!element.dataset.wavyInitialized) {
+                element.replaceChildren();
+                element.dataset.wavyInitialized = "true";
+            }
 
-            for (const symbol of text) {
+            const chars = [...text];
+
+            for (let i = 0; i < Math.min(chars.length, element.children.length); i++) {
+                const span = element.children[i];
+                const symbol = chars[i];
+
+                if (span.textContent !== symbol) {
+                    span.textContent = symbol === " " ? "\u00A0" : symbol === "\n" ? "" : symbol;
+                    span.style.display = symbol === "\n" ? "block" : "inline-block";
+                }
+            }
+
+            while (element.children.length > chars.length) {
+                element.lastElementChild.remove();
+            }
+
+            while (element.children.length < chars.length) {
+                const i = element.children.length;
                 const span = document.createElement("span");
+                const symbol = chars[i];
+
                 span.className = "wavysymbol";
-                span.textContent = symbol === " " ? "\u00A0" : symbol;
+                span.style.animationDelay = `-${i * 0.05}s`;
+                span.textContent = symbol === " " ? "\u00A0" : symbol === "\n" ? "" : symbol;
+                span.style.display = symbol === "\n" ? "block" : "inline-block";
+
                 element.appendChild(span);
             }
+        }
 
-            let delay = 0;
-            for (const span of element.querySelectorAll(".wavysymbol")) {
-                span.style.animationDelay = `-${delay}s`;
-                delay += 0.1;
-            }
+        const t = document.querySelector("#ageformat");
+        const birthdate = new Date(2010, 8, 11);
+
+        function update() {
+            const age = (Date.now() - birthdate.getTime())
+                / (365.2425 * 24 * 60 * 60 * 1000);
+
+            let text = `she/her, ${age.toPrecision(10)} years old`;
+
+            const tlength = text.length;
+
+            const t2 = (("#").repeat(tlength) + "\n").repeat(2);
+            text = t2 + text + "\n" + t2
+
+            renderWavy(t, text);
+
+            requestAnimationFrame(update)
+        }
+
+        requestAnimationFrame(update)
+
+        document.querySelectorAll(".wavytext").forEach((element) => {
+            renderWavy(element, element.textContent)
         });
 
         const lightbox = document.querySelector(".lightbox");
@@ -88,15 +137,15 @@
         const lightboxtext = lightbox.querySelector("p");
 
         document.addEventListener("click", async (e) => {
-            clickedimage = e.target.closest(".vimg")
+            clickedimage = e.target.closest(".vimg");
             if (!clickedimage) return;
 
             viewimage.src = clickedimage.src;
 
             if (clickedimage.alt == "") {
-                lightboxtext.style.display = "none"
+                lightboxtext.style.display = "none";
             } else {
-                lightboxtext.style.display = ""
+                lightboxtext.style.display = "";
                 lightboxtext.textContent = clickedimage.alt;
             }
 
@@ -108,7 +157,7 @@
                 ],
                 { duration: 100, fill: "forwards" },
             );
-        })
+        });
 
         lightbox.addEventListener("click", async (e) => {
             if (e.target !== lightbox) return;
@@ -121,7 +170,7 @@
             );
             await animation.finished;
             lightbox.style.display = "none";
-        })
+        });
 
         lightbox.addEventListener("mouseover", (e) => {
             if (e.target !== lightbox) return;
@@ -132,7 +181,7 @@
                 ],
                 { duration: 100, fill: "forwards" },
             );
-        })
+        });
 
         lightbox.addEventListener("mouseout", (e) => {
             if (e.target !== lightbox) return;
@@ -143,7 +192,7 @@
                 ],
                 { duration: 100, fill: "forwards" },
             );
-        })
+        });
     </script>
 </body>
 

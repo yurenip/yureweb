@@ -100,6 +100,7 @@ p {
     justify-content: center;
 }
 
-.lightbox img {
-    height: 50%;
+.lightbox img, .lightbox p {
+    height: fit-content;
+    max-width: 75%;
 }
