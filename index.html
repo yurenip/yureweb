@@ -22,7 +22,7 @@
         <h1>yurenip</h1>
         <small>also known as pea, peasoup, veggiepeasoup and whatnot</small>
         <p id="ageformat"
-            style="font-weight: bold; width: fit-content; color: transparent; background: linear-gradient(#5BCEFA, #F5A9B8, #FFFFFF, #F5A9B8, #5BCEFA); background-clip: text;">
+            style="line-height:1.25em; font-weight: bold; color: transparent; background: linear-gradient(#5BCEFA, #F5A9B8, #FFFFFF, #F5A9B8, #5BCEFA); -webkit-text-fill-color: transparent; -webkit-background-clip: text; background-clip: text;">
         </p>
         <p>i like coding and games!!!</p>
         <p>i also love music mmhm yeah i can't live a day without it</p>
@@ -114,11 +114,11 @@
             const age = (Date.now() - birthdate.getTime())
                 / (365.2425 * 24 * 60 * 60 * 1000);
 
-            let text = `she/her, ${age.toPrecision(10)} years old`;
+            let text = `she/her, ${age.toPrecision(11)} years old`;
 
             const tlength = text.length;
 
-            const t2 = (("#").repeat(tlength) + "\n").repeat(2);
+            const t2 = (("#").repeat(tlength) + "\n").repeat(3);
             text = t2 + text + "\n" + t2
 
             renderWavy(t, text);

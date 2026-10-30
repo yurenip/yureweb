@@ -87,6 +87,10 @@ p {
     to { transform: translateY(-10%); }
 }
 
+.vimg:hover {
+    cursor: pointer;
+}
+
 .lightbox {
     background-color: #141312;
     position: fixed;
@@ -101,6 +105,6 @@ p {
 }
 
 .lightbox img, .lightbox p {
-    height: fit-content;
+    max-height: 50%;
     max-width: 75%;
 }
